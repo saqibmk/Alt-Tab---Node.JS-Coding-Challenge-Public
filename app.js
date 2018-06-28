@@ -1,10 +1,12 @@
 import express from "express";
 import bodyParser from "body-parser";
 import connectToDb from "./db";
-import registerUser from "./registerUser";
-import loginUser from "./loginUser";
-import getProfile from "./userProfile";
+// import registerUser from "./registerUser";
+// import loginUser from "./loginUser";
+// import getProfile from "./userProfile";
 import jwt from "express-jwt";
+
+import { registerUser, loginUser, getProfile } from "./controllers/user";
 
 import dotenv from "dotenv";
 
