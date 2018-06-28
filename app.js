@@ -1,8 +1,10 @@
 import express from "express";
 import bodyParser from "body-parser";
 import connectToDb from "./db";
+import registerUser from "./registerUser";
+import dotenv from "dotenv";
 
-require("dotenv").config();
+dotenv.config();
 const app = express();
 
 /* Your code */
@@ -14,9 +16,10 @@ app.use(bodyParser.json());
 
 app.post("/api/register", async (req, res) => {
   try {
-    res.status(201).send({});
+    const token = await registerUser(req.body);
+    res.status(201).send({ token });
   } catch (error) {
-    res.status(401).send("Registration Error");
+    res.status(400).send("Registration Error");
   }
 });
 
