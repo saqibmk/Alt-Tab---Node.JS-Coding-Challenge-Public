@@ -1,6 +1,6 @@
 import User from "./models/user";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import createJWT from "./createJWT";
 
 const registerUser = async body => {
   try {
@@ -14,13 +14,7 @@ const registerUser = async body => {
       password: hashedPassword
     });
     const result = await newUser.save();
-    return await jwt.sign(
-      {
-        id: result._id,
-        iat: Date.now()
-      },
-      process.env.JWT_SECRET
-    );
+    return await createJWT(result._id);
   } catch (error) {
     throw new Error(error);
   }
